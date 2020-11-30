@@ -1,0 +1,14 @@
+﻿@page "/"
+
+<h1>@data</h1>
+
+@code
+{
+    private string data;
+    private TestClass tc = new TestClass();
+
+    protected override async Task OnInitializedAsync()
+    {
+        data = (await tc.GetData()).ToString();
+    }
+}

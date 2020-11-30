@@ -1,0 +1,7 @@
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\GarageWCFService.dll.config
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\GarageWCFService.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\GarageWCFService.pdb
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.csprojAssemblyReference.cache
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.csproj.CoreCompileInputs.cache
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.pdb
