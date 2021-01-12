@@ -26,6 +26,11 @@ namespace DAL.Configuration
             builder.Property(ms => ms.MaintenanceType)
                 .IsRequired();
 
+            builder.Property(c => c.Status)
+                .HasConversion(
+                v => v.ToString(),
+                v => (StatusEnum)Enum.Parse(typeof(StatusEnum), v));
+
             builder.Property(ms => ms.MaintenanceType)
                 .HasConversion(
                 v => v.ToString(),
@@ -35,14 +40,14 @@ namespace DAL.Configuration
                 .WithMany(c => c.Maintenances)
                 .IsRequired();
 
-            builder.HasData(
-                new { MaintenanceId = 1, Date = DateTime.Now, Milage = 1234567890, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 1 },
-                new { MaintenanceId = 2, Date = DateTime.Now, Milage = 1234567890, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 2 },
-                new { MaintenanceId = 3, Date = DateTime.Now, Milage = 1234567890, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 3 },
-                new { MaintenanceId = 4, Date = DateTime.Now, Milage = 1234567890, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 4, Id = 4 },
-                new { MaintenanceId = 5, Date = DateTime.Now, Milage = 1234567890, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 5, Id = 5 },
-                new { MaintenanceId = 6, Date = DateTime.Now, Milage = 1234567890, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 6, Id = 6 }
-                );
+            //builder.HasData(
+            //    new { MaintenanceId = 1, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 1 },
+            //    new { MaintenanceId = 2, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 2 },
+            //    new { MaintenanceId = 3, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "Reparatie", MaintenanceType = MaintenanceEnum.REPAIR, CarId = 3 },
+            //    new { MaintenanceId = 4, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 4,},
+            //    new { MaintenanceId = 5, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 5,},
+            //    new { MaintenanceId = 6, Date = DateTime.Now, Milage = 1234567890, Status = StatusEnum.REGISTERED, Description = "APK", MaintenanceType = MaintenanceEnum.MOT, CarId = 6,}
+            //    );
         }
     }
 }

@@ -10,11 +10,9 @@ namespace DAL
 {
     public class GarageContext : DbContext
     {
-        public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Maintenance> Maintenances { get; set; }
-        public DbSet<CarModel> CarModels { get; set; }
 
         public GarageContext()
         {
@@ -42,11 +40,9 @@ namespace DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration<Brand>(new BrandConfiguration());
             modelBuilder.ApplyConfiguration<Car>(new CarConfiguration());
             modelBuilder.ApplyConfiguration<Owner>(new OwnerConfiguration());
             modelBuilder.ApplyConfiguration<Maintenance>(new MaintenanceConfiguration());
-            modelBuilder.ApplyConfiguration<CarModel>(new CarModelConfiguration());
         }
 
     }

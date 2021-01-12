@@ -45,6 +45,7 @@ namespace DAL.Repositories
         public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
         public void AddRange(IEnumerable<T> entities)
@@ -55,6 +56,7 @@ namespace DAL.Repositories
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
             await _context.Set<T>().AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<T> Where(Expression<Func<T, bool>> expression)
@@ -72,14 +74,20 @@ namespace DAL.Repositories
             _context.Set<T>().Update(entity);
         }
 
-        public void UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
         }
 
         public void Remove(T entity)
         {
             _context.Set<T>().Remove(entity);
+        }
+        public async Task RemoveAsync(T entity)
+        {
+            _context.Entry(entity).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
         }
 
         public void RemoveRange(IEnumerable<T> entities)
@@ -87,17 +95,13 @@ namespace DAL.Repositories
             _context.Set<T>().RemoveRange(entities);
         }
 
-        public void RemoveAsync(T entity)
-        {
-            _context.Entry(entity).State = EntityState.Deleted;
-        }
-
-        public void RemoveRangeAsync(IEnumerable<T> entities)
+        public async Task RemoveRangeAsync(IEnumerable<T> entities)
         {
             foreach (T entity in entities)
             {
                 _context.Entry(entity).State = EntityState.Deleted;
             }
+            await _context.SaveChangesAsync();
         }
     }
 }

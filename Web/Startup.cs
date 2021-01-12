@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Web.Services;
+using Web.Services.Interfaces;
 
 namespace Web
 {
@@ -30,12 +32,14 @@ namespace Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddDbContext<GarageContext>();
-            services.AddScoped<ICarRepository, CarRepository>();
-            services.AddScoped<IOwnerRepository, OwnerRepository>();
-            services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
-            services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<ICarModelRepository, CarModelRepository>();
+            services.AddDbContext<GarageContext>(ServiceLifetime.Transient);
+            services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<IOwnerRepository, OwnerRepository>();
+            services.AddTransient<IMaintenanceRepository, MaintenanceRepository>();
+            services.AddTransient<IRDWService, RDWService>();
+            services.AddTransient<ICarService, CarService>();
+            services.AddTransient<IOwnerService, OwnerService>();
+            services.AddTransient<IMaintenanceService, MaintenanceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

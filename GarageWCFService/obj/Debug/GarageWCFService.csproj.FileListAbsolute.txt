@@ -5,3 +5,8 @@ C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\G
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.csproj.CoreCompileInputs.cache
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.dll
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.pdb
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\Newtonsoft.Json.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\Newtonsoft.Json.xml
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\obj\Debug\GarageWCFService.csproj.CopyComplete
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\DTO.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\GarageWCFService\bin\DTO.pdb

@@ -1,0 +1,202 @@
+﻿@inject IMaintenanceService MaintenanceService
+@inject ICarService CarService
+@inject IRDWService RDWService
+
+<EditForm Model="@Maintenance" OnValidSubmit="@HandleValidSubmit">
+    <FluentValidationValidator />
+    <FormHeader Title="Maintenance" ButtonText="@ButtonText" ButtonType="@ButtonType" />
+
+    <div class="pt-3 border border-top-0 rounded-bottom">
+        <div class="ml-3 mb-3 mr-3">
+
+            @if (Maintenance == null || Cars == null)
+            {
+                <Spinner />
+            }
+            else
+            {
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">Car</label>
+                        <div class="input-group">
+                            <CustomInputSelect class="custom-select" @bind-Value="Maintenance.CarId">
+                                @foreach (var car in Cars)
+                                    {
+                                    <option value="@car.CarId">@car.LicenseNumber</option>
+                                    }
+                            </CustomInputSelect>
+                        </div>
+                        <ValidationMessage For="() => Maintenance.Car" />
+                    </div>
+                    <div class="offset-md-2 col-md-4">
+                        <label class="control-label">Status</label>
+                        @if (Maintenance.InspectionDate > DateTime.Now && Maintenance.InspectionDate != null)
+                        {
+                            <p>Inspection due on: @Maintenance.InspectionDate</p>
+
+                        }
+                        else if (Maintenance.InspectionDate < DateTime.Now && Maintenance.InspectionDate != null)
+                        {
+                            <p>Inspected on: @Maintenance.InspectionDate</p>
+                        }
+                        else
+                        {
+                            <div class="input-group">
+                                <InputSelect class="custom-select" @bind-Value="Maintenance.Status" disabled>
+                                    @foreach (var type in Enum.GetValues(typeof(Domain.Enums.StatusEnum)))
+                                            {
+                                        <option value="@type">@type</option>
+                                            }
+                                </InputSelect>
+                                <div class="input-group-append">
+                                    <button class="btn @statusButtonType" @onclick="ChangeStatus">@statusButtonText</button>
+                                </div>
+                            </div>
+                            <ValidationMessage For="() => Maintenance.Status" />
+                        }
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">Milage</label>
+                        <div class="input-group">
+                            <InputNumber id="milage" class="form-control" placeholder="12345678" @bind-Value="Maintenance.Milage" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Maintenance.Milage" />
+                    </div>
+
+                    <div class="offset-md-2 col-md-4">
+                        <label class="control-label">Maintenance Type</label>
+                        <div class="input-group">
+                            <InputSelect class="custom-select" @bind-Value="Maintenance.MaintenanceType">
+                                @foreach (var type in Enum.GetValues(typeof(Domain.Enums.MaintenanceEnum)))
+                                    {
+                                    <option value="@type">@type</option>
+                                    }
+                            </InputSelect>
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Maintenance.MaintenanceType" />
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-md-12">
+                        <label class="control-label">Description</label>
+                        <div class="input-group">
+                            <InputTextArea id="description" class="form-control" placeholder="Maintenance description" @bind-Value="Maintenance.Description" rows="5" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Maintenance.Description" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</EditForm>
+
+
+@code
+{
+    Maintenance Maintenance { get; set; } = new Maintenance();
+    IEnumerable<Car> Cars { get; set; }
+
+
+    string ButtonText { get; set; } = "Create";
+    string ButtonType { get; set; } = "btn-success";
+    string statusButtonText { get; set; }
+    string statusButtonType { get; set; }
+
+    [CascadingParameter]
+    public int Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Cars = await CarService.GetAll();
+
+        if (Id != 0)
+        {
+            ButtonText = "Update";
+            ButtonType = "btn-warning";
+            Maintenance = await MaintenanceService.Find(Id);
+        }
+        else
+        {
+            if(Cars.Count() > 0)
+            {
+                Maintenance.CarId = Cars.FirstOrDefault().CarId;
+            }
+            else
+            {
+                Maintenance = new Maintenance();
+            }
+
+        }
+        UpdateButton();
+    }
+
+    async Task HandleValidSubmit()
+    {
+        if (Id != 0)
+        {
+            await MaintenanceService.Update(Maintenance);
+        }
+        else
+        {
+            await MaintenanceService.Add(Maintenance);
+        }
+    }
+
+    private async void ChangeStatus()
+    {
+
+        if (Maintenance.Status == Domain.Enums.StatusEnum.READY)
+        {
+            Maintenance.InspectionDate = await RDWService.GetInspection();
+            if (Maintenance.InspectionDate != null)
+            {
+                Maintenance.Status = Domain.Enums.StatusEnum.SAMPLE_TEST;
+            }
+            else
+            {
+                Maintenance.Status = Domain.Enums.StatusEnum.SIGNED_OFF;
+            }
+        }
+        else if ((int)Maintenance.Status < 2)
+        {
+            Maintenance.Status = Maintenance.Status + 1;
+        }
+
+        await MaintenanceService.Update(Maintenance);
+        UpdateButton();
+    }
+
+    private void UpdateButton()
+    {
+        switch (Maintenance.Status)
+        {
+            case Domain.Enums.StatusEnum.REGISTERED:
+                statusButtonType = "btn-success";
+                statusButtonText = "Start";
+                break;
+            case Domain.Enums.StatusEnum.IN_PROGRESS:
+                statusButtonType = "btn-warning";
+                statusButtonText = "Ready";
+                break;
+            case Domain.Enums.StatusEnum.READY:
+                statusButtonType = "btn-danger";
+                statusButtonText = "Sign Off";
+                break;
+            case Domain.Enums.StatusEnum.SAMPLE_TEST:
+                statusButtonType = "btn-danger";
+                statusButtonText = "Sign Off";
+                break;
+            case Domain.Enums.StatusEnum.SIGNED_OFF:
+                statusButtonType = "d-none";
+                statusButtonText = "";
+                break;
+        }
+    }
+}

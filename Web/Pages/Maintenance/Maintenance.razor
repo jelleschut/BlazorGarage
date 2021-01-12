@@ -1,0 +1,54 @@
+﻿@page "/Maintenance"
+@page "/Maintenance/{Id:int}"
+
+
+<div class="row">
+
+    <h1>Maintenance</h1>
+    <button class="btn btn-info offset-11 mb-3" @onclick="Toggle">@text</button>
+</div>
+
+@if (showList)
+{
+    <MaintenanceList DetailsCallback="Details" />
+}
+else
+{
+    <CascadingValue Value="Id">
+        <MaintenanceForm />
+    </CascadingValue>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private bool showList;
+
+    private string text;
+
+    protected override void OnInitialized()
+    {
+        if (Id == 0)
+        {
+            showList = true;
+        }
+        text = Id == 0 ? "New" : "List";
+    }
+
+    public void Toggle()
+    {
+        showList = !showList;
+        text = showList ? "New" : "List";
+        if (!showList)
+        {
+            Id = 0;
+        }
+    }
+    public void Details(int id)
+    {
+        Toggle();
+        Id = id;
+    }
+}
+

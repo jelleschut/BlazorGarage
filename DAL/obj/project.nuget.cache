@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "RM2+OO6klrWXkLXqzM+uov9wg1ucAYM8NL8irXqcSFEN0GC+l7+1cuuanbrJ9DzrzT4kdI6VrjqOnT/q56CMXQ==",
+  "dgSpecHash": "7f8Pz3wLe0nwxz7U1xWPCIzIFAU6IYIFLFS7RmhnVVgcEJT42IBLKtuKZ8xmQutjRMa1JFDKuQFt7cGfAkLiew==",
   "success": true,
   "projectFilePath": "C:\\Users\\SCHUB05\\Documents\\InfoSupport\\Projects\\Blok1Opdracht\\BeunHaasGarageV2\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\SCHUB05\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.3.0\\fluentvalidation.aspnetcore.9.3.0.nupkg.sha512",
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.3.0\\fluentvalidation.dependencyinjectionextensions.9.3.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",
@@ -129,7 +132,6 @@
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.text.encoding.codepages\\4.7.0\\system.text.encoding.codepages.4.7.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\SCHUB05\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\SCHUB05\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",

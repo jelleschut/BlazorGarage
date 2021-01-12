@@ -1,0 +1,15 @@
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\DAL.deps.json
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\DAL.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\ref\DAL.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\DAL.pdb
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\Domain.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\bin\Debug\net5.0\Domain.pdb
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.csprojAssemblyReference.cache
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.AssemblyInfoInputs.cache
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.AssemblyInfo.cs
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.csproj.CopyComplete
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\ref\DAL.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\DAL\obj\Debug\net5.0\DAL.pdb

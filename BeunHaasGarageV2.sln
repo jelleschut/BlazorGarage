@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{5C02AEDE-B626-4B50-A4E7-016BD673980C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{5C02AEDE-B626-4B50-A4E7-016BD673980C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{A29169D5-A8E0-4AAF-AE30-0BA8BBFF9638}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{A29169D5-A8E0-4AAF-AE30-0BA8BBFF9638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{E0E7B061-5870-4179-8044-C1BC111FA78F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{E0E7B061-5870-4179-8044-C1BC111FA78F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageWCFService", "GarageWCFService\GarageWCFService.csproj", "{68BEABE5-3D8D-4128-B549-D70FA318537F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{68BEABE5-3D8D-4128-B549-D70FA318537F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BEABE5-3D8D-4128-B549-D70FA318537F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BEABE5-3D8D-4128-B549-D70FA318537F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

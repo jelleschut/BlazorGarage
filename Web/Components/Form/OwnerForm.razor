@@ -1,0 +1,138 @@
+﻿@inject IOwnerService OwnerService
+
+<EditForm Model="@Owner" OnValidSubmit="@HandleValidSubmit">
+    <FluentValidationValidator />
+
+    <FormHeader Title="Customer" ButtonText="@ButtonText" ButtonType="@ButtonType" />
+
+    <div class="pt-3 border border-top-0 rounded-bottom">
+        <div class="ml-3 mb-3 mr-3">
+            @if (Owner == null)
+            {
+                <Spinner />
+            }
+            else
+            {
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">Name</label>
+                        <div class="input-group">
+                            <InputText id="name" class="form-control" placeholder="Full Name" @bind-Value="Owner.Name" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.Name" />
+                    </div>
+                    <div class="offset-md-2 col-md-4">
+                        <label class="control-label">City</label>
+                        <div class="input-group">
+                            <InputText id="city" class="form-control" placeholder="City" @bind-Value="Owner.City" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.City" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">Street</label>
+                        <div class="input-group">
+                            <InputText id="street" class="form-control" placeholder="Street" @bind-Value="Owner.Street" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.Street" />
+                    </div>
+                    <div class="offset-md-2 col-md-1">
+                        <label class="control-label">No.</label>
+                        <div class="input-group">
+                            <InputText id="housenumber" type="number" class="form-control" placeholder="No." @bind-Value="Owner.HouseNumber" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.HouseNumber" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Zipcode</label>
+                        <div class="input-group">
+                            <InputText id="Zipcode" class="form-control" placeholder="1234AB" @bind-Value="Owner.Zipcode" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.Zipcode" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">Phonenumber</label>
+                        <div class="input-group">
+                            <InputText id="phonenumber" class="form-control" placeholder="0612345678" @bind-Value="Owner.PhoneNumber" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.PhoneNumber" />
+                    </div>
+                    <div class="offset-md-2 col-md-4">
+                        <label class="control-label">Email</label>
+                        <div class="input-group">
+                            <InputText id="email" class="form-control" placeholder="john.doe@mail.com" @bind-Value="Owner.Email" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.Email" />
+
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-md-4">
+                        <label class="control-label">Type</label>
+                        <div class="input-group">
+                            <InputSelect class="custom-select" @bind-Value="Owner.OwnerType">
+                                @foreach (var type in Enum.GetValues(typeof(Domain.Enums.OwnerEnum)))
+                                    {
+                                    <option value="@type">@type</option>
+                                    }
+                            </InputSelect>
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Owner.OwnerType" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</EditForm>
+
+@code
+{
+    private Owner Owner { get; set; } = new Owner();
+
+    public string Title { get; set; } = "New Customer";
+    public string ButtonText { get; set; } = "Create";
+    public string ButtonType { get; set; } = "btn-success";
+
+    [CascadingParameter]
+    public int Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        if (Id != 0)
+        {
+            ButtonText = "Update";
+            ButtonType = "btn-warning";
+            Owner = await OwnerService.Find(Id);
+        }
+        else
+        {
+
+        }
+    }
+
+    async Task HandleValidSubmit()
+    {
+        if (Id != 0)
+        {
+            await OwnerService.Update(Owner);
+        }
+        else
+        {
+            await OwnerService.Add(Owner);
+        }
+    }
+}

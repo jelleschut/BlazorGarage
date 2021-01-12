@@ -1,0 +1,162 @@
+﻿@inject ICarService CarService
+@inject IOwnerService OwnerService
+@inject IRDWService RdwService
+@inject ICarService CarService
+@inject NavigationManager NavManager  
+
+<EditForm Model="@Car" OnValidSubmit="@HandleValidSubmit">
+    <FluentValidationValidator />
+
+    <FormHeader Title="Car" ButtonText="@ButtonText" ButtonType="@ButtonType" />
+
+    <div class="pt-3 border border-top-0 rounded-bottom">
+        <div class="ml-3 mb-3 mr-3">
+            @if (Owners == null || Drivers == null)
+            {
+                <Spinner />
+            }
+            else
+            {
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label class="control-label">License Number</label>
+                        <div class="input-group">
+                            <InputText id="name" class="form-control" placeholder="License Number"
+                                       @oninput="GetCarInfo"
+                                       @bind-Value="Car.LicenseNumber" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Car.LicenseNumber" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <label class="control-label">Brand</label>
+                        <div class="input-group">
+                            <InputText id="name" class="form-control" placeholder="Brand"
+                                       disabled
+                                       @bind-Value="Car.Brand" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Car.Brand" />
+                    </div>
+
+                    <div class="offset-md-1 col-md-5">
+                        <label class="control-label">Model</label>
+                        <div class="input-group">
+                            <InputText id="name" class="form-control" placeholder="model"
+                                       disabled
+                                       @bind-Value="Car.Model" />
+                            <div class="input-group-append"></div>
+                        </div>
+                        <ValidationMessage For="() => Car.Model" />
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="col-md-4">
+                        <label class="control-label">Owner</label>
+                        <div class="input-group">
+                            <CustomInputSelect class="custom-select" @bind-Value="Car.OwnerId">
+                                @foreach (var owner in Owners)
+                                    {
+                                    <option value="@owner.OwnerId">@owner.Name</option>
+                                    }
+                            </CustomInputSelect>
+                            <div class="input-group-append">
+                            </div>
+                            <ValidationMessage For="() => Car.Owner" />
+                        </div>
+                    </div>
+
+                    <div class="offset-md-2 col-md-4">
+                        <label class="control-label">Driver</label>
+                        <div class="input-group">
+                            <CustomInputSelect class="custom-select" @bind-Value="Car.DriverId">
+                                @foreach (var driver in Drivers)
+                                    {
+                                    <option value="@driver.OwnerId">@driver.Name</option>
+                                    }
+                            </CustomInputSelect>
+                            <div class="input-group-append">
+                            </div>
+                            <ValidationMessage For="() => Car.Driver" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</EditForm>
+
+@if (Id != 0)
+{
+    <MaintenanceList CarId="Id" />
+}
+
+@code
+{
+    private Car Car { get; set; } = new Car();
+
+    public string ButtonText { get; set; } = "Create";
+    public string ButtonType { get; set; } = "btn-success";
+    public int BrandId { get; set; }
+
+    public IEnumerable<Owner> Owners { get; set; }
+    public IEnumerable<Owner> Drivers { get; set; }
+
+    [CascadingParameter]
+    public int Id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Owners = await OwnerService.GetAll();
+        Drivers = Owners.Where(o => o.OwnerType == Domain.Enums.OwnerEnum.DRIVER);
+
+        if (Id != 0)
+        {
+            ButtonText = "Update";
+            ButtonType = "btn-warning";
+            Car = await CarService.Find(Id);
+        }
+        else
+        {
+            Car.Owner = Owners.FirstOrDefault();
+            Car.Driver = Drivers.FirstOrDefault();
+
+            if(Car.Owner != null)
+            {
+                Car.OwnerId = Car.Owner.OwnerId;
+            }
+            if (Car.Driver != null)
+            {
+                Car.DriverId = Car.Driver.OwnerId;
+            }
+        }
+    }
+
+    async Task GetCarInfo(ChangeEventArgs e)
+    {
+        if (e.Value.ToString().Length >= 6)
+        {
+            RDWDto rdwDto = await RdwService.GetCarData(e.Value.ToString());
+            if (rdwDto != null)
+            {
+                Car.Brand = rdwDto.Brand;
+                Car.Model = rdwDto.Model;
+            }
+        }
+    }
+
+    async Task HandleValidSubmit()
+    {
+        if (Id != 0)
+        {
+            await CarService.Update(Car);
+        }
+        else
+        {
+            await CarService.Add(Car);
+        }
+    }
+}

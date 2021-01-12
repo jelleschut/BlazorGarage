@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "jByDW8xl24WWhIEq5HuRer8WPQhjyx7iFnf6AOceFfpfsJ/SR8oee+/brDlMN6FhsNf585UdyVzBJkCbG/10og==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\SCHUB05\\Documents\\InfoSupport\\Projects\\Blok1Opdracht\\BeunHaasGarageV2\\DTO\\DTO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\SCHUB05\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

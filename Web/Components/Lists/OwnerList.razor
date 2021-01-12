@@ -1,0 +1,92 @@
+﻿@inject IOwnerService OwnerService
+
+<div class="row">
+    <div class="col-2 mb-3">
+        <h5>Search</h5>
+        <div class="input-group no-color">
+            <input class="form-control" @bind="searchParam" @bind:event="oninput" />
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped table-hover table-sm">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th class="col-2">
+                Name
+            </th>
+            <th class="col-2">
+                City
+            </th>
+            <th class="col-2">
+                <div class="text-light font-weight-bold">
+                    Address
+                </div>
+            </th>
+            <th class="col-2">
+                Zipcode
+            </th>
+            <th class="col-2">
+                <div class="text-light font-weight-bold">
+                    PhoneNumber
+                </div>
+            </th>
+            <th class="col-2">
+                <div class="text-light font-weight-bold">
+                    Email
+                </div>
+            </th>
+        </tr>
+    </thead>
+    @if (Owners == null)
+    {
+        <Spinner />
+    }
+    else
+    {
+        <tbody class="border">
+            @foreach (var owner in FilteredOwners)
+            {
+                <tr class="d-flex">
+                    <td class="col-2">
+                        @owner.Name
+                    </td>
+                    <td class="col-2">
+                        @owner.City
+                    </td>
+                    <td class="col-2">
+                        @owner.Street @owner.HouseNumber
+                    </td>
+                    <td class="col-2">
+                        @owner.Zipcode
+                    </td>
+                    <td class="col-2">
+                        @owner.PhoneNumber
+                    </td>
+                    <td class="col-2">
+                        <button class="btn btn-sm btn-info" @onclick="@(async () => await DetailsCallback.InvokeAsync(owner.OwnerId))">Details</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+
+@code {
+    List<Owner> Owners { get; set; } = new List<Owner>();
+
+    string searchParam { get; set;  } = "";
+
+    [Parameter]
+    public EventCallback<int> DetailsCallback { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        Owners = (await OwnerService.GetAll()).ToList();
+    }
+
+    List<Owner> FilteredOwners => Owners.Where(o => o.Name.ToLower().Contains(searchParam.ToLower())
+                                                 || o.City.ToLower().Contains(searchParam.ToLower())
+                                                 || o.Zipcode.ToLower().Contains(searchParam.ToLower())).ToList();
+}

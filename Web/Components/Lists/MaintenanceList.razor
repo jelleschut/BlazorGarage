@@ -1,0 +1,167 @@
+﻿@inject IMaintenanceService MaintenanceService
+@inject IRDWService RDWService
+@inject NavigationManager NavManager
+
+
+<div class="row">
+    <div class="col-2 mb-3">
+        <h5>Search</h5>
+        <div class="input-group no-color">
+            <input class="form-control" @bind="searchParam" @bind:event="oninput" />
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped table-hover table-sm">
+    <thead class="thead-dark">
+        <tr class="d-flex">
+            <th class="col-1">
+                ID
+            </th>
+            <th class="col-2">
+                Date
+            </th>
+            <th class="col-2">
+                Milage
+            </th>
+            <th class="col-2">
+                Type
+            </th>
+            <th class="col-2">
+                Status
+            </th>
+            <th class="col-3">
+
+            </th>
+        </tr>
+    </thead>
+    @if (Maintenances == null)
+    {
+        <Spinner />
+    }
+    else
+    {
+        <tbody class="border">
+            @foreach (var maintenance in FilteredMaintenance)
+            {
+                <tr class="d-flex">
+                    <td class="col-1">
+                        @maintenance.Car.LicenseNumber
+                    </td>
+                    <td class="col-2">
+                        @maintenance.Date.ToShortDateString()
+                    </td>
+                    <td class="col-2">
+                        @maintenance.Milage
+                    </td>
+                    <td class="col-2">
+                        @maintenance.MaintenanceType
+                    </td>
+                    @*<td class="col-2">
+                            <button class="btn @statusButtonType" @onclick="(() => ChangeStatus(maintenance))">@statusButtonText</button>
+                        </td>*@
+                    <td class="col-2">
+                        @maintenance.Status
+                    </td>
+                    <td class="col-1">
+                    </td>
+                    <td class="col-2">
+                        @if (CarId != 0)
+                        {
+                            <button class="btn btn-sm btn-info" @onclick="(() => Redirect(maintenance.MaintenanceId))">Details</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm btn-info" @onclick="@(async () => await DetailsCallback.InvokeAsync( maintenance.MaintenanceId))">Details</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+
+@code {
+    List<Maintenance> Maintenances { get; set; } = new List<Maintenance>();
+
+    string searchParam { get; set; } = "";
+    string statusButtonText { get; set; }
+    string statusButtonType { get; set; }
+
+    [Parameter]
+    public int CarId { get; set; }
+
+    [Parameter]
+    public EventCallback<int> DetailsCallback { get; set; }
+
+    List<Maintenance> FilteredMaintenance => Maintenances.Where(m => m.Car.LicenseNumber.ToLower().Contains(searchParam.ToLower())).ToList();
+
+    public void Redirect(int id)
+    {
+        NavManager.NavigateTo("/Maintenance/" + id);
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        if (CarId != 0)
+        {
+            Maintenances = (await MaintenanceService.Where(m => m.CarId == CarId)).ToList();
+
+        }
+        else
+        {
+            Maintenances = (await MaintenanceService.GetAll()).ToList();
+        }
+    }
+
+    private async void ChangeStatus(Maintenance maintenance)
+    {
+
+        if (maintenance.Status == Domain.Enums.StatusEnum.READY)
+        {
+            maintenance.InspectionDate = await RDWService.GetInspection();
+            if (maintenance.InspectionDate != null)
+            {
+                maintenance.Status = Domain.Enums.StatusEnum.SAMPLE_TEST;
+            }
+            else
+            {
+                maintenance.Status = Domain.Enums.StatusEnum.SIGNED_OFF;
+            }
+        }
+        else if ((int)maintenance.Status < 2)
+        {
+            maintenance.Status = maintenance.Status + 1;
+        }
+
+        await MaintenanceService.Update(maintenance);
+        UpdateButton(maintenance);
+    }
+
+    private void UpdateButton(Maintenance maintenance)
+    {
+        switch (maintenance.Status)
+        {
+            case Domain.Enums.StatusEnum.REGISTERED:
+                statusButtonType = "btn-success";
+                statusButtonText = "Start";
+                break;
+            case Domain.Enums.StatusEnum.IN_PROGRESS:
+                statusButtonType = "btn-warning";
+                statusButtonText = "Ready";
+                break;
+            case Domain.Enums.StatusEnum.READY:
+                statusButtonType = "btn-danger";
+                statusButtonText = "Sign Off";
+                break;
+            case Domain.Enums.StatusEnum.SAMPLE_TEST:
+                statusButtonType = "btn-danger";
+                statusButtonText = "Sign Off";
+                break;
+            case Domain.Enums.StatusEnum.SIGNED_OFF:
+                statusButtonType = "d-none";
+                statusButtonText = "";
+                break;
+        }
+    }
+}

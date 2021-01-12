@@ -12,10 +12,14 @@ namespace Domain.Models
 
         [DisplayName("Licensenumber")]
         public string LicenseNumber { get; set; }
-        public StatusEnum? Status { get; set; }
+        public string Brand { get; set; }
+        public string Model { get; set; }
+
+        //Foreign Keys
+        public int OwnerId { get; set; }
+        public int DriverId { get; set; }
 
         //Navigation Properties
-        public virtual CarModel CarModel { get; set; }
         public virtual Owner Owner { get; set; }
         public virtual Owner Driver { get; set; }
         public virtual List<Maintenance> Maintenances { get; set; }

@@ -10,7 +10,7 @@ namespace DAL.Repositories
     {
         public CarRepository(GarageContext context) : base(context)
         {
-
+            
         }
     }
 }

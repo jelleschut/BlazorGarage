@@ -14,11 +14,11 @@ namespace Domain.Models
         public string City { get; set; }
         public string Street { get; set; }
         [DisplayName("No.")]
-        public int HouseNumber { get; set; }
+        public string HouseNumber { get; set; }
         public string Zipcode { get; set; }
         [DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
-        [MaxLength(30)]
+        //[MaxLength(30)]
         public string Email { get; set; }
         public OwnerEnum OwnerType { get; set; }
 

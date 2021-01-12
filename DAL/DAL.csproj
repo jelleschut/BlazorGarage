@@ -1,8 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201201115044_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201201115044_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201201115159_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201201115159_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201201115513_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201201115513_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20201202180053_InitialCreate.cs" />
+    <Compile Remove="Migrations\20201202180053_InitialCreate.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
