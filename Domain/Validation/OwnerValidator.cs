@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Domain.Validation
 {
-    class OwnerValidator : AbstractValidator<Owner>
+    public class OwnerValidator : AbstractValidator<Owner>
     {
         Regex re = new Regex(@"\d{4} ?[A-Za-z]{2}");
         public OwnerValidator()

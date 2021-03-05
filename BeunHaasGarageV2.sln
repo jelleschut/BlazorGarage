@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarageWCFService", "GarageWCFService\GarageWCFService.csproj", "{68BEABE5-3D8D-4128-B549-D70FA318537F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2BCF1914-4853-4D31-A06C-BDCD0E23F2F5}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Vue", "Vue\Vue.njsproj", "{2D00502B-2337-415E-93C1-44E9179F6556}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0C4B481-7F73-4226-B78D-0A36F1CC7F41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BCF1914-4853-4D31-A06C-BDCD0E23F2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BCF1914-4853-4D31-A06C-BDCD0E23F2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BCF1914-4853-4D31-A06C-BDCD0E23F2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BCF1914-4853-4D31-A06C-BDCD0E23F2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D00502B-2337-415E-93C1-44E9179F6556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D00502B-2337-415E-93C1-44E9179F6556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D00502B-2337-415E-93C1-44E9179F6556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D00502B-2337-415E-93C1-44E9179F6556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

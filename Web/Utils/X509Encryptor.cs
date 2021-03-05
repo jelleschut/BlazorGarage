@@ -36,7 +36,10 @@ namespace Web.Utils
         public string Encrypt(string stringToEncrypt)
         {
             if (x509 == null || string.IsNullOrEmpty(stringToEncrypt))
+            {
                 throw new Exception("A x509 certificate and string for encryption must be provided");
+            }
+
 
             RSA rsa = x509.GetRSAPublicKey();
 
@@ -49,10 +52,15 @@ namespace Web.Utils
         public string Decrypt(string stringTodecrypt)
         {
             if (x509 == null || string.IsNullOrEmpty(stringTodecrypt))
+            {
                 throw new Exception("A x509 certificate and string for decryption must be provided");
+            }
+
 
             if (!x509.HasPrivateKey)
+            {
                 throw new Exception("x509 certicate does not contain a private key for decryption");
+            }
 
             RSA rsa = (RSA)x509.GetRSAPrivateKey();
 
@@ -62,32 +70,6 @@ namespace Web.Utils
             ASCIIEncoding enc = new ASCIIEncoding();
             return enc.GetString(plainbytes);
         }
-
-        //public void RunEncryption()
-        //{
-        //    try
-        //    {
-        //        X509Certificate2 myCert =
-        //           LoadCertificate(StoreLocation.CurrentUser,
-        //           "CN=LocalHost");
-
-        //        string myText = "This is the text I wish to encrypt";
-        //        Console.WriteLine("UNENCRYPTED: " + myText);
-
-        //        string encrypted = Encrypt(myCert, myText);
-
-        //        Console.WriteLine("ENCRYPTED: " + encrypted);
-
-        //        string decrypted = Decrypt(myCert, encrypted);
-
-        //        Console.WriteLine("DECRYPTED: " + decrypted);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("EXCEPTION: {0}", e.Message);
-        //    }
-
-        //}
     }
 }
 

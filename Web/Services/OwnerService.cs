@@ -1,11 +1,13 @@
 ﻿using Domain.Interfaces;
 using Domain.Models;
+using Domain.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Services.Interfaces;
 using Web.Utils;
+using FluentValidation;
 
 namespace Web.Services
 {
@@ -13,16 +15,21 @@ namespace Web.Services
     {
         private readonly IOwnerRepository _ownerRepository;
         private X509Encryptor encryptor;
+        private OwnerValidator validator;
 
         public OwnerService(IOwnerRepository ownerRepository)
         {
             _ownerRepository = ownerRepository;
             encryptor = new X509Encryptor();
+            validator = new OwnerValidator();
         }
 
         public async Task Add(Owner owner)
         {
-            await _ownerRepository.AddAsync(EncryptOwner(owner));
+            if (IsValid(owner))
+            {
+                await _ownerRepository.AddAsync(EncryptOwner(owner));
+            }
         }
 
         public async Task<Owner> Find(int id)
@@ -45,7 +52,10 @@ namespace Web.Services
 
         public async Task Update(Owner owner)
         {
-            await _ownerRepository.UpdateAsync(EncryptOwner(owner));
+            if(IsValid(owner))
+            {
+                await _ownerRepository.UpdateAsync(EncryptOwner(owner));
+            }
         }
 
         public Owner EncryptOwner(Owner owner)
@@ -81,6 +91,11 @@ namespace Web.Services
             owner.Email = encryptor.Decrypt(owner.Email);
 
             return owner;
+        }
+
+        public bool IsValid(Owner owner)
+        {
+            return owner != null && validator.Validate(owner).IsValid;
         }
     }
 }

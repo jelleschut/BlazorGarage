@@ -222,3 +222,5 @@ C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\W
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\Web\obj\Debug\net5.0\Razor\Components\UI\Search.razor.g.cs
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\Web\obj\Debug\net5.0\RazorDeclaration\Components\UI\MaintenanceStatusButton.razor.g.cs
 C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\Web\obj\Debug\net5.0\Razor\Components\UI\MaintenanceStatusButton.razor.g.cs
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\Web\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\SCHUB05\Documents\InfoSupport\Projects\Blok1Opdracht\BeunHaasGarageV2\Web\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll

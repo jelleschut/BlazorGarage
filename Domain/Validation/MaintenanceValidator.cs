@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Domain.Validation
 {
-    class MaintenanceValidator : AbstractValidator<Maintenance>
+    public class MaintenanceValidator : AbstractValidator<Maintenance>
     {
         private readonly IEnumerable<Maintenance> _maintenances;
         public MaintenanceValidator(IEnumerable<Maintenance> maintenances)
